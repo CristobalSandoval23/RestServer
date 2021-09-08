@@ -54,10 +54,12 @@ const usuariosPost = async (req, res = response) =>{
 }
 const usuariosDelete = async(req, res = response) =>{
     const {id} = req.params;
+
     const usuario = await Usuario.findByIdAndUpdate(id, {estado:false});
+
     res.json({
         msg: 'Delete Apiii',
-        usuario
+        usuario,
     })
 }
 const usuariosPatch = (req, res = response) =>{
