@@ -1,6 +1,4 @@
 const { response } = require("express");
-const router = require("../routes/user");
-
 
 const esAdminRole = (req, res = response, next) =>{
     if(!req.usuario){

@@ -27,7 +27,7 @@ router.put('/:id',[
         validarCampos
         ],usuariosPut);
 router.post('/', [
-        check('nombre', 'El correo es obligatorio').not().isEmpty(),
+        check('nombre', 'El nombre es obligatorio').not().isEmpty(),
         check('password', 'El password debe de ser más de 8 letras').isLength({min:8}),
         check('correo', 'El correo no es válido').isEmail(),
         check('correo').custom(esCorreoValido),
