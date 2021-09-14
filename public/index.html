@@ -10,10 +10,16 @@
 </head>
 <body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <div id="fetch-async"></div>
+
+    <div class="container-data"><span>desde</span><input  class="datos" type="number" placeholder="1" required></div>
+    <div class="container-data"><span>limite</span><input class="datos" type="number" placeholder="3" required></div>
+    <button type="button" class="btn" aria-required="true">Botton</button>
     <span>a</span>
     <a href="#" onclick="signOut();">Sign out</a>
 </body>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="main.js"></script>
 <script>
   var url = (window.location.hostname.includes('localhost'))
               ? 'http://localhost:8088/api/auth/google'

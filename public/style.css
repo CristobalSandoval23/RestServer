@@ -1,6 +1,8 @@
-.salir {
-    background-color: black;
+
+.btn{
+    background-color: blue;
     color: blanchedalmond;
-    height: 20px;
-    width: 40px;
+    width: 100px;
+    height: 50px;
 }
+

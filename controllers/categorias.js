@@ -7,7 +7,7 @@ const obtenerCategorias = async(req = request, res = response) => {
     const {limite = 3, desde = 0} = req.query;
     const query = {estado:true};
 
-    const [total, categorias] = await Promise.all([
+    const [total, data] = await Promise.all([
         Categoria.countDocuments(query),
         Categoria.find(query)
             .populate('usuario', 'nombre')
@@ -18,7 +18,7 @@ const obtenerCategorias = async(req = request, res = response) => {
      res.json({
         msg: 'obtenerCategorias',
         total,
-        categorias
+        data
     })
 }
 // obtenerCategoria - populate
