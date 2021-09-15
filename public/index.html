@@ -6,48 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOOGLE sign in</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <meta name="google-signin-client_id" content="1050523323118-i35d0qqvvpbuhdepbh9qj8e4ahm0k752.apps.googleusercontent.com">
 </head>
 <body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <div id="fetch-async"></div>
-
-    <div class="container-data"><span>desde</span><input  class="datos" type="number" placeholder="1" required></div>
-    <div class="container-data"><span>limite</span><input class="datos" type="number" placeholder="3" required></div>
+  <div class="container-data"><span>desde</span><input  class="datos" type="number" placeholder="1" required></div>
+  <div class="container-data"><span>limite</span><input class="datos" type="number" placeholder="3" required></div>
     <button type="button" class="btn" aria-required="true">Botton</button>
     <span>a</span>
-    <a href="#" onclick="signOut();">Sign out</a>
+   
+      <a href="#" onclick="signOut();">Sign out</a>
+  
+
+    <div class="col-sm-6">
+      <h1>Login manual</h1>
+      <br>
+      <form action="" class="d-grid">
+        <input type="text" name="correo" class="form-control mb-2" placeholder="Correo">
+        <input type="text" name="password" class="form-control mb-2" placeholder="Password">
+
+        <button class="btn btn-primary">
+          Ingresar
+        </button>
+      </form>
+      
+    </div>
 </body>
+<script src="./socket.io/socket.io.js"></script>
+<script src="js/auth.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="main.js"></script>
-<script>
-  var url = (window.location.hostname.includes('localhost'))
-              ? 'http://localhost:8088/api/auth/google'
-              :'https://mi-primer-restserver.herokuapp.com/api/auth/google';
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-        var id_token = googleUser.getAuthResponse().id_token;
-        const data = {id_token};
-
-        fetch(url, {
-          method: 'POST',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify(data)
-        })
-        .then(resp => resp.json())
-        .then(data => console.log('Nuestro server', data))
-        .catch(console.log);
-    }
-    function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>
 </html>
