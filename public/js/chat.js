@@ -118,4 +118,10 @@ const main = async() =>{
     await validarTWT();
 }
 
-main();
+
+(()=>{
+    gapi.load('auth2', () => {
+        gapi.auth2.init();
+        main();
+    });
+})();
