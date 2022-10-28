@@ -39,7 +39,8 @@ const usuariosPut = async(req, res = response) =>{
 }
 const usuariosPost = async (req, res = response) =>{
 
-    const {nombre, correo, password, rol} = req.body;
+    console.log(req.body)
+    const {nombre, correo, password, rol, uid} = req.body;
     const usuario = new Usuario({nombre, correo, password, rol});
 
 
@@ -49,6 +50,7 @@ const usuariosPost = async (req, res = response) =>{
     await usuario.save();
 
     res.json({
+        msg: 'holaa',
         usuario
     })
 }

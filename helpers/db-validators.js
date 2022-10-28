@@ -1,8 +1,9 @@
 const { 
     Categoria, 
-    Producto,
+    EgresoIngreso,
     Usuario, 
-    Role 
+    Role, 
+    Tipo
 } = require('../models');
 
 
@@ -35,12 +36,20 @@ const esCategoriaValido = async(id = '')=>{
             throw new Error(`El id ${id} no está registrado en la BD`)
         }
 }
-const esProductoValido = async(id = '')=>{
+const esEgresoIngresoValido = async(id = '')=>{
     
-    const existeProducto = await Producto.findById(id);
+    const existeEgresoIngreso = await EgresoIngreso.findById(id);
 
-        if(!existeProducto){
-            throw new Error(`El id ${id} del producto no está registrado en la BD`)
+        if(!existeEgresoIngreso){
+            throw new Error(`El id ${id} del EgresoIngreso no está registrado en la BD`)
+        }
+}
+const esTipoValido = async(tipo = '')=>{
+    
+    const existeTipo = await Tipo.findOne({tipo});
+
+        if(!existeTipo){
+            throw new Error(`El tipo ${tipo} del EgresoIngreso no está registrado en la BD`)
         }
 }
 
@@ -60,6 +69,7 @@ module.exports = {
     esCorreoValido,
     esUsuarioValido,
     esCategoriaValido,
-    esProductoValido,
+    esEgresoIngresoValido,
+    esTipoValido,
     coleccionesPermitidas
 };

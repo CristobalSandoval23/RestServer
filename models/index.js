@@ -1,13 +1,15 @@
 const Categoria = require('./categoria')
-const Producto = require('./producto')
+const EgresoIngreso = require('./egreso-ingreso')
 const Role = require('./role')
+const Tipo = require('./tipo')
 const Usuario = require('./usuario')
 const ChatMensajes = require('./chat-mensajes')
 
 module.exports = {
     Categoria,
-    Producto,
+    EgresoIngreso,
     Role,
     Usuario,
+    Tipo,
     ChatMensajes
 }

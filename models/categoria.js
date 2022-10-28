@@ -11,6 +11,13 @@ const CategoriaSchema = Schema({
         default: true,
         required: true
     },
+    color: {
+        type: String,
+        required: [true, 'El color es obligatorio'],
+    },
+    uid: {
+        type: String,
+    },
     usuario: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',

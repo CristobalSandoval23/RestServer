@@ -12,6 +12,7 @@
     "express-fileupload": "^1.2.1",
     "express-validator": "^6.12.1",
     "google-auth-library": "^7.9.1",
+    "jshint": "^2.13.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.4",
     "socket.io": "^4.2.0",
