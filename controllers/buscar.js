@@ -4,13 +4,13 @@ const { ObjectId } = require("mongoose").Types;
 const {
         Usuario, 
         Categoria, 
-        Producto
+        EgresoIngreso
     } = require('../models')
 
 const colecccionesPermitidas = [
     'usuarios',
     'categorias',
-    'productos',
+    'ingresos',
     'role'
 ]
 
@@ -52,30 +52,44 @@ const buscarCategorias = async(termino = '', res = response)=>{
         results: categorias
     })
 }
-const buscarProductos = async(termino = '', res = response)=>{
+const buscarIngresosEgresos = async(termino = '', categoria = '',res = response)=>{
+    
     const esMongoID = ObjectId.isValid(termino);
+    const esMongoIDCategoria = ObjectId.isValid(categoria);
     
     if(esMongoID){
-        const producto = await Producto.findById(termino)
-                                .populate('categoria', 'nombre');
+        const egresoIngreso = await EgresoIngreso.findById(termino);
        return res.json({
-            results: (producto) ? [producto] : []
+            results: (egresoIngreso) ? [egresoIngreso] : []
         })
 
     }
 
+    // const regex = new RegExp(termino, 'i');
     const regex = new RegExp(termino, 'i');
-
-    const productos = await Producto.find({nombre:regex}, {estado:true})
-                                    .populate('categoria', 'nombre');
+    const regexCategoria = new RegExp(categoria, 'i');
+    
+    var Navidad = new Date('04 25');
+    var mes = Navidad.getMonth();
+    console.log(mes);
+    const [egresoIngresos, fecha] = await Promise.all([
+                        EgresoIngreso.countDocuments({estado:false}),
+                        EgresoIngreso.find({$and:[
+                            {fecha:regex}
+                        ]})
+                    ]);
+    console.log(egresoIngresos, termino);
     res.json({
-        results: productos
+        results: egresoIngresos,
+        fecha
     })
 }
 
 const buscar = (req, res = response) => {
+    console.log(req);
     
     const {coleccion, termino} = req.params;
+    const {categoria} = req.query;
 
     if(!colecccionesPermitidas.includes(coleccion)){
         return res.status(400).json({
@@ -90,8 +104,8 @@ const buscar = (req, res = response) => {
         case 'categorias':
             buscarCategorias(termino, res);
             break;
-            case 'productos':
-            buscarProductos(termino, res);
+            case 'ingresos':
+            buscarIngresosEgresos(termino,categoria, res);
             break;
     
         default:

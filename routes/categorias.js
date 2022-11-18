@@ -25,7 +25,7 @@ router.get('/:id', [
 router.post('/', [
     validarJWT,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('color', 'El color es obligatorio').not().isEmpty(),
+    // check('color', 'El color es obligatorio').not().isEmpty(),
     validarCampos
 ],crearCategoria);
 

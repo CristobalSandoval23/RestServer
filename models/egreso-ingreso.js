@@ -22,7 +22,7 @@ const EgresoIngresoSchema = Schema({
         default: 0
     },
     fecha:{
-        type: Date,
+        type: String,
         default:Date.now()
     },
     categoria: {

@@ -12,8 +12,11 @@ const CategoriaSchema = Schema({
         required: true
     },
     color: {
+        type: Number,
+        default: 21334
+    },
+    icon: {
         type: String,
-        required: [true, 'El color es obligatorio'],
     },
     uid: {
         type: String,

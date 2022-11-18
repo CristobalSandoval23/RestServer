@@ -3,22 +3,35 @@ const { EgresoIngreso } = require("../models");
 
 // obtenerCategorias - paginado - total - populate
 const obtenerEgresoIngresos = async(req = request, res = response) => {
-
-    const {limite = 3, desde = 0} = req.query;
+    // console.log(Date.now().getMonth());
+    const {limite = 3, desde = 0, fecha = 2022} = req.query;
+    const regexFecha = new RegExp(fecha, 'i');
+    const regexIngreso = new RegExp("ingreso", 'i');
+    const regexGasto = new RegExp("gasto", 'i');
     const query = {estado:true};
-
-    const [total, data] = await Promise.all([
+        console.log(fecha);
+    const [total, data,ingreso, gasto] = await Promise.all([
         EgresoIngreso.countDocuments(query),
         EgresoIngreso.find(query)
-            .populate('usuario', 'nombre')
+            .populate('categoria', 'nombre')
             .skip(Number(desde))
-            .limit(Number(limite))
+            .limit(Number(limite)),
+        EgresoIngreso.find({
+            $and:[{tipo:regexIngreso}, {fecha:regexFecha}, query]
+        })
+        .populate('categoria', 'nombre'),
+        EgresoIngreso.find({
+            $and:[{tipo:regexGasto}, {fecha:regexFecha},query]
+        })
+        .populate('categoria', 'nombre'),,
     ])
 
      res.json({
         msg: 'obtenerEgresoIngresos',
         total,
-        data
+        data,
+        ingreso,
+        gasto
     })
 }
 // obtenerCategoria - populate
