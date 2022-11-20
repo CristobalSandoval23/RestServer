@@ -13,10 +13,11 @@ const CategoriaSchema = Schema({
     },
     color: {
         type: Number,
-        default: 21334
+        default: 0
     },
     icon: {
-        type: String,
+        type: Number,
+        default: 0
     },
     uid: {
         type: String,
